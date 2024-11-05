@@ -21,35 +21,12 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
-      - uses: npm/action-setup@v2.4.1
-        name: Install npm
-        id: npm-install
-        with:
-          version: 7
-          run_install: false
-
-      - name: Get npm store directory
-        id: npm-cache
-        shell: bash
-        run: |
-          echo "STORE_PATH=$(npm store path)" >> $GITHUB_OUTPUT
-
-      - uses: actions/cache@v4.0.2
-        name: Setup npm cache
-        with:
-          path: ${{ steps.npm-cache.outputs.STORE_PATH }}
-          key: ${{ runner.os }}-npm-store-${{ hashFiles('**/npm-lock.yaml') }}
-          restore-keys: |
-            ${{ runner.os }}-npm-store-
-
       - name: Install dependencies
-        run: npm install --no-frozen-lockfile
+        run: npm ci
 
       - name: Build
-        run: npm build
+        run: npm run build
 
-      - name: Lint
-        run: npm lint
 # Initializes a deployment status for preview environments.
 # Runs for all branches except main.
       - name: Start Deployment
