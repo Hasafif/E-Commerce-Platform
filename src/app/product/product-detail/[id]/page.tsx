@@ -23,6 +23,7 @@ interface pageParam {
 }
 
 
+
 type ProductData = {
     _id: string,
     productName: string,
@@ -55,7 +56,7 @@ export default function Page({ params, searchParams }: { params: any, searchPara
 
 
 
-    
+
     useEffect(() => {
         const userData = localStorage.getItem('user');
         if (!userData) return;

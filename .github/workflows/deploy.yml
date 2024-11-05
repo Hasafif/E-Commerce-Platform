@@ -26,7 +26,7 @@ jobs:
       - name: Add Environment File
         run: |
           echo "${{vars.ENV}}" > .env
-          echo "${{secrets.ENV}}" >> .env
+          echo "${{NEW.ENV}}" >> .env
       - name: Build
         run: npm run build
 
