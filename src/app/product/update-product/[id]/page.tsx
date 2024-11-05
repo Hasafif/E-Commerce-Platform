@@ -72,7 +72,7 @@ interface userData {
   name: String
 }
 
-export default function Page({ params, searchParams }: { params: Usable<pageParam>, searchParams: any }) {
+export default function Page({ params, searchParams }: { params: any, searchParams: any }) {
 
 
   const [loader, setLoader] = useState(false)

@@ -77,7 +77,7 @@ interface pageParam {
 
 
 
-export default function Page({ params, searchParams }: { params: Usable<pageParam>, searchParams: any }) {
+export default function Page({ params, searchParams }: { params: any, searchParams: any }) {
     const Router = useRouter();
     const [page_params,set_page_params] = useState<pageParam>(use(params))
     const user = useSelector((state: RootState) => state.User.userData) as userData | null

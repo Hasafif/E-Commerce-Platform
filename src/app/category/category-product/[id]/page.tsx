@@ -32,7 +32,7 @@ type ProductData = {
 
 
 
-export default function Page({ params, searchParams }: { params: Usable<pageParam>, searchParams: any }) {
+export default function Page({ params, searchParams }: { params:any, searchParams: any }) {
     const [thisProduct , setThisProdData] =  useState<ProductData[] | []>([]);
     const [page_params,set_page_params]=useState<pageParam>(use(params))
     const { data, isLoading } = useSWR('/gettingProductOFSpecificCategoryID', () => get_product_by_category_id(page_params.id))

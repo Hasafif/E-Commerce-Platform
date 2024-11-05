@@ -46,7 +46,7 @@ type User = {
     _id: string,
 }
 
-export default function Page({ params, searchParams }: { params: Usable<pageParam>, searchParams: any }) {
+export default function Page({ params, searchParams }: { params: any, searchParams: any }) {
     const dispatch = useDispatch();
     const [prodData, setprodData] = useState<ProductData | undefined>(undefined);
     const [page_params,set_page_params] = useState<pageParam>(use<pageParam>(params))
