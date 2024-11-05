@@ -52,7 +52,6 @@ export default function Page({ params, searchParams }: { params: any, searchPara
     const [page_params,set_page_params] = useState<pageParam>(use<pageParam>(params))
     const user = useSelector((state: RootState) => state.User.userData) as User | null
     const { data, isLoading } = useSWR('/gettingProductbyID', () => get_product_by_id(page_params.id))
-    //if (data?.success !== true) showToast.error({message:data?.message,duration:5000})
 
 
     useEffect(() => {
