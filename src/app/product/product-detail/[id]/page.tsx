@@ -54,6 +54,8 @@ export default function Page({ params, searchParams }: { params: any, searchPara
     const { data, isLoading } = useSWR('/gettingProductbyID', () => get_product_by_id(page_params.id))
 
 
+
+    
     useEffect(() => {
         const userData = localStorage.getItem('user');
         if (!userData) return;

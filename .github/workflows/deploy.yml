@@ -23,7 +23,10 @@ jobs:
 
       - name: Install dependencies
         run: npm ci
-
+      - name: Add Environment File
+        run: |
+          echo "${{vars.ENV}}" > .env
+          echo "${{secrets.ENV}}" >> .env
       - name: Build
         run: npm run build
 
