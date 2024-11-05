@@ -48,6 +48,7 @@ jobs:
           vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
           scope: ${{ secrets.VERCEL_ORG_ID }}
           github-token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+          env:
 # Deploys the app to Vercel in production mode.
 # Runs only when changes are pushed to the main branch.
       - name: Deploy to Production

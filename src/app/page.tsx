@@ -27,6 +27,8 @@ export default function Home() {
     //toast.warning("Application is under development , some features may not work properly")
     //toast.warning('This is a demo website, you can not buy anything from here')
     showToast.custom({
+
+    
       message: 'This is a demo website, you can not buy anything from here!',
     });
   }, [])*/
