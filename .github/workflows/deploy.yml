@@ -22,34 +22,34 @@ jobs:
           node-version: ${{ matrix.node-version }}
 
       - uses: pnpm/action-setup@v2.4.1
-        name: Install pnpm
-        id: pnpm-install
+        name: Install npm
+        id: npm-install
         with:
           version: 7
           run_install: false
 
-      - name: Get pnpm store directory
-        id: pnpm-cache
+      - name: Get npm store directory
+        id: npm-cache
         shell: bash
         run: |
-          echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
+          echo "STORE_PATH=$(npm store path)" >> $GITHUB_OUTPUT
 
       - uses: actions/cache@v4.0.2
-        name: Setup pnpm cache
+        name: Setup npm cache
         with:
-          path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
-          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          path: ${{ steps.npm-cache.outputs.STORE_PATH }}
+          key: ${{ runner.os }}-npm-store-${{ hashFiles('**/npm-lock.yaml') }}
           restore-keys: |
-            ${{ runner.os }}-pnpm-store-
+            ${{ runner.os }}-npm-store-
 
       - name: Install dependencies
-        run: pnpm install --no-frozen-lockfile
+        run: npm install --no-frozen-lockfile
 
       - name: Build
-        run: pnpm build
+        run: npm build
 
       - name: Lint
-        run: pnpm lint
+        run: npm lint
 # Initializes a deployment status for preview environments.
 # Runs for all branches except main.
       - name: Start Deployment
