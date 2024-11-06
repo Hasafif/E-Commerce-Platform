@@ -12,7 +12,7 @@ const schema = Joi.object({
 });
 
 
-export  async function POST (req : NextRequest,res:NextResponse)  {
+export  async function POST (req : NextRequest)  {
     await connectDB();
     const { email, password, name } = await req.json();
     const { error } = schema.validate({ email, password, name });
