@@ -43,7 +43,7 @@ export default function Login() {
             dispatch(setUserData(JSON.parse(userDataString)));
             if (res?.finalData?.user?.role === 'admin') {
                 Router.push('/Dashboard')
-                showToast.custom({message:`Welcome ${res?.finalData?.user?.name}`})
+                showToast.custom({message:`Welcome ${res?.finalData?.user?.role}`})
             }
             else {
                 Router.push('/')
