@@ -47,7 +47,7 @@ export default function Login() {
             }
             else {
                 Router.push('/')
-                showToast.custom({message:`Welcome ${res?.finalData?.user?.name}`})
+                showToast.custom({message:`Welcome ${res?.finalData?.user?.role}`})
             }
         }
         else {
