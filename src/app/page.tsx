@@ -7,7 +7,6 @@ import FeaturedProduct from '@/components/FeaturedProduct'
 import TopCategories from '@/components/TopCategories'
 import { get_all_categories } from '@/Services/Admin/category'
 import { get_all_products } from '@/Services/Admin/product'
-import useSWR from 'swr'
 import { showToast } from '@/Store/toast';
 import { setCategoryData, setCatLoading, setProdLoading, setProductData } from '@/utils/AdminSlice'
 import { useDispatch, useSelector } from 'react-redux'
@@ -28,7 +27,7 @@ export default function Home() {
     //toast.warning('This is a demo website, you can not buy anything from here')
     showToast.custom({
 
-    
+
       message: 'This is a demo website, you can not buy anything from here!',
     });
   }, [])*/
