@@ -1,7 +1,7 @@
 import connectDB from '@/DB/connectDB';
 import User from '@/model/User';
 import Joi from 'joi';
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import { hash } from 'bcryptjs';
 
 
@@ -12,11 +12,8 @@ const schema = Joi.object({
 });
 
 
-export  async function POST (req : Request)  {
+export  async function POST (req : NextRequest,res:NextResponse)  {
     await connectDB();
-
-    
-
     const { email, password, name } = await req.json();
     const { error } = schema.validate({ email, password, name });
     console.log(error)
