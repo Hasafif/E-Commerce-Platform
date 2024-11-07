@@ -5,8 +5,6 @@ import React, { useEffect } from 'react'
 import AdminNavbar from '@/components/AdminNavbar';
 import AdminSidebar from '@/components/AdminSidebar';
 import SuperComponent from '@/components/SuperComponent';
-import { showToast } from '@/Store/toast';
-import toast from 'react-hot-toast';
 import useSWR from 'swr'
 import { get_all_categories } from '@/Services/Admin/category';
 import { useDispatch } from 'react-redux';
@@ -41,11 +39,8 @@ export default function Dashboard() {
 
 
   const { data: categoryData, isLoading: categoryLoading } = useSWR('/gettingAllCategoriesFOrAdmin', get_all_categories)
- // if (categoryData?.success !== true) toast.error(categoryData?.message,{duration:5000})
   const { data: productData, isLoading: productLoading } = useSWR('/gettingAllProductsFOrAdmin', get_all_products)
-  //if (productData?.success !== true) toast.error(productData?.message,{duration:5000})
   const {data : orderData, isLoading : orderLoading} = useSWR('/gettingAllOrdersForAdmin', get_all_orders)
- // if (orderData?.success !== true) toast.error(orderData?.message,{duration:5000})
 
   console.log(orderData?.data)
   useEffect(() => {

@@ -135,7 +135,7 @@ export default function Page({ params, searchParams }: { params: any, searchPara
 
     return (
         <div className='w-full dark:text-black p-4 min-h-screen  bg-gray-50 flex flex-col '>
-            <div className="text-sm breadcrumbs  border-b-2 border-b-orange-600">
+            <div className="text-sm breadcrumbs  bg-gray-900 text-white border-b-2">
                 <ul>
                     <li onClick={() => dispatch(setNavActive('Base'))}>
                         <Link href={'/Dashboard'}>
@@ -158,14 +158,14 @@ export default function Page({ params, searchParams }: { params: any, searchPara
                         <TailSpin
                             height="50"
                             width="50"
-                            color="orange"
+                            color="gray"
                             ariaLabel="tail-spin-loading"
                             radius="1"
                             wrapperStyle={{}}
                             wrapperClass=""
                             visible={true}
                         />
-                        <p className='text-sm mt-2 font-semibold text-orange-500'>updating Category Hold Tight ....</p>
+                        <p className='text-sm mt-2 font-semibold text-gray-900'>updating Category Hold Tight ....</p>
                     </div>
                 ) : (
 
@@ -207,7 +207,7 @@ export default function Page({ params, searchParams }: { params: any, searchPara
                                 )
                             }
 
-                            <button className='btn btn-block mt-3'>Done !</button>
+                            <button className='btn btn-block mt-3 bg-gray-900'>Update</button>
 
                         </form >
                     </div >

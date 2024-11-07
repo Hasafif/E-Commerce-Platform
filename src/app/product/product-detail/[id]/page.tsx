@@ -14,7 +14,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '@/Store/store'
 import { add_to_cart } from '@/Services/common/cart'
 import { setUserData } from '@/utils/UserDataSlice'
-import { bookmark_product } from '@/Services/common/bookmark'
+import { bookmark_product, delete_a_bookmark_item, } from '@/Services/common/bookmark'
 
 
 
@@ -90,11 +90,11 @@ export default function Page({ params, searchParams }: { params: any, searchPara
             showToast.error({message:res?.message,duration:5000})
         }
     }
-
+    
 
     return (
         <div className='w-full h-full dark:text-black lg:h-screen bg-gray-200 py-4 px-2'>
-            <div className="text-sm breadcrumbs  border-b-2 py-2 px-2 border-b-orange-600">
+            <div className="text-sm breadcrumbs bg-gray-900 text-white border-b-2 py-2 px-2 border-b-white">
                 <ul>
                     <li>
                         <Link href={"/"}>
@@ -127,22 +127,23 @@ export default function Page({ params, searchParams }: { params: any, searchPara
                             </div>
                             <div className='lg:w-8/12 w-full px-3 h-full  rounded flex flex-col lg:px-5 py-2'>
                                 <div className='flex flex-col  lg:flex-row md:justify-between w-full md:h-20 py-2 items-center'>
-                                    <h1 className='text-3xl font-semibold text-black'>{prodData?.productName}</h1>
+                                    <h1 className='text-3xl font-semibold text-black'>{`Name: ${prodData?.productName}`}</h1>
                                     {
                                         prodData?.productFeatured &&
-                                        <p className='px-3 py-2 bg-orange-600 hidden lg:flex font-semibold tracking-widest rounded text-white  items-center justify-center '>
+                                        <p className='px-3 py-2 bg-blue-600 hidden lg:flex font-semibold tracking-widest rounded text-white  items-center justify-center '>
                                             <DiCodeigniter className='mx-2' />
                                             Featured Product
                                         </p>
                                     }
                                 </div>
+                                <h1 className='text-3xl font-semibold text-black py-2'>{`Description:`}</h1>
                                 <p className=' py-2   lg:h-40 w-full'>
-                                    {prodData?.productDescription} Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rerum, Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum, blanditiis.
+                                {prodData?.productDescription}
                                 </p>
-                                <h1 className='text-3xl font-semibold text-black py-2'>$ {`${prodData?.productPrice}`}</h1>
+                                <h1 className='text-3xl font-semibold text-black py-2'>{`Price: ${prodData?.productPrice} $`}</h1>
                                 <div className='w-full py-2 lg:flex-row flex-col flex '>
-                                    <button onClick={AddToCart} className='btn m-2 lg:w-52 h-10 btn-outline btn-success flex items-center justify-center'> <BiCartAdd className='text-3xl mx-2' /> Add to Cart</button>
-                                    <button onClick={AddToBookmark} className='btn m-2  lg:w-52 h-10 btn-outline btn-success flex items-center justify-center'> <RiBookMarkFill className='text-3xl mx-2' />Bookmark</button>
+                                    <button onClick={AddToCart} className='btn m-2 w-fit flex items-center justify-center space-x-2 px-3 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-300'> <BiCartAdd className='text-3xl mx-2' /> Add to Cart</button>
+                                    <button onClick={AddToBookmark} className='btn m-2  w-fit flex items-center justify-center space-x-2 px-3 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-300'> <RiBookMarkFill className='text-3xl mx-2' />Bookmark</button>
                                 </div>
 
                             </div>
@@ -155,3 +156,5 @@ export default function Page({ params, searchParams }: { params: any, searchPara
         </div>
     )
 }
+
+

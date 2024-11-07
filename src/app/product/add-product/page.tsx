@@ -120,7 +120,6 @@ export default function AddProduct() {
         const CheckFileSize = maxSize(data.image[0]);
         if (CheckFileSize) return showToast.error({message:'Image size must be less then 1MB',duration:5000})
         const uploadImageToFirebase = await uploadImages(data.image[0]);
-        // const uploadImageToFirebase = 'https://firebasestorage.googleapis.com/v0/b/socialapp-9b83f.appspot.com/o/ecommerce%2Fcategory%2Fimages131.jpg-1683339363348-c4vcab?alt=media&token=f9303ff9-7d34-4514-a53f-832f72814337';
 
         const finalData = { productName: data.name, productDescription: data.description, productImage: uploadImageToFirebase, productSlug: data.slug , productFeatured  : data.feature , productPrice : data.price , productQuantity : data.quantity , productCategory : data.categoryID}
         const res = await add_new_product(finalData)
@@ -143,7 +142,7 @@ export default function AddProduct() {
 
     return (
         <div className='w-full  p-4 min-h-screen  bg-gray-50 flex flex-col '>
-            <div className="text-sm breadcrumbs  border-b-2 border-b-orange-600">
+            <div className="text-sm breadcrumbs bg-gray-900 text-white border-b-2">
                 <ul className='dark:text-black'>
                     <li>
                         <Link href={"/Dashboard"}>
@@ -166,14 +165,14 @@ export default function AddProduct() {
                         <TailSpin
                             height="50"
                             width="50"
-                            color="orange"
+                            color="gray"
                             ariaLabel="tail-spin-loading"
                             radius="1"
                             wrapperStyle={{}}
                             wrapperClass=""
                             visible={true}
                         />
-                        <p className='text-sm mt-2 font-semibold text-orange-500'>Adding Product Hold Tight ....</p>
+                        <p className='text-sm mt-2 font-semibold text-gray-900'>Adding Product Hold Tight ....</p>
                     </div>
                 ) : (
 
@@ -243,12 +242,12 @@ export default function AddProduct() {
                                 <label className="label">
                                     <span className="label-text">Add product Image</span>
                                 </label>
-                                <input accept="image/*" max="1000000"  {...register("image", { required: true })} type="file" className="file-input file-input-bordered w-full " />
-                                {errors.image && <span className='text-red-500 text-xs mt-2'>This field is required and the image must be less than or equal to 1MB.</span>}
+                                <input accept="image/*" max="10000000"  {...register("image", { required: true })} type="file" className="file-input file-input-bordered w-full" />
+                                {errors.image && <span className='text-red-500 text-xs mt-2'>This field is required and the image must be less than or equal to 5MB.</span>}
 
                             </div>
 
-                            <button className='btn btn-block mt-3'>Done !</button>
+                            <button className='btn btn-block mt-3 bg-gray-900'>Add</button>
 
                         </form >
                     </div >

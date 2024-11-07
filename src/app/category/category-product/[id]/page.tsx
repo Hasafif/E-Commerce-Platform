@@ -4,9 +4,9 @@
 import { get_product_by_category_id } from '@/Services/Admin/product'
 import Loading from '@/app/loading'
 import ProductCard from '@/components/ProductCard'
+import { ArrowLeft, ArrowRight } from 'lucide-react'
 import Link from 'next/link'
-import React, { Usable, use, useEffect, useState } from 'react'
-import { showToast } from '@/Store/toast';
+import React, { use, useEffect, useState } from 'react'
 import useSWR from 'swr'
 
 interface pageParam {
@@ -36,7 +36,6 @@ export default function Page({ params, searchParams }: { params:any, searchParam
     const [thisProduct , setThisProdData] =  useState<ProductData[] | []>([]);
     const [page_params,set_page_params]=useState<pageParam>(use(params))
     const { data, isLoading } = useSWR('/gettingProductOFSpecificCategoryID', () => get_product_by_category_id(page_params.id))
-    //if (data?.success !== true) showToast.error({message:data?.message,duration:5000})
 
     useEffect(() => {
         setThisProdData(data?.data)
@@ -45,10 +44,31 @@ export default function Page({ params, searchParams }: { params:any, searchParam
     const CategoryName  =  thisProduct?.map((item) => {
         return item?.productCategory?.categoryName
     })
-
+    const [currentPage, setCurrentPage] = useState(1);
+    const itemsPerPage = 3;
+  
+    // Calculate pagination
+    const indexOfLastItem = currentPage * itemsPerPage;
+    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+    const currentItems = thisProduct?.slice(indexOfFirstItem, indexOfLastItem);
+    const totalPages = Math.ceil(thisProduct?.length / itemsPerPage);
+    const handlePageChange = (pageNumber: number) => {
+      setCurrentPage(pageNumber);
+    };
+    const handlePrevPage = () => {
+      if (currentPage > 1) {
+        setCurrentPage(currentPage - 1);
+      }
+    };
+  
+    const handleNextPage = () => {
+      if (currentPage < totalPages) {
+        setCurrentPage(currentPage + 1);
+      }
+    };
     return (
         <div className='w-full h-screen dark:text-black bg-gray-50 py-4 px-2 '>
-            <div className="text-sm breadcrumbs  border-b-2 border-b-orange-600">
+            <div className="text-sm breadcrumbs bg-gray-900 text-white border-b-2 border-b-white">
                 <ul>
                     <li>
                         <Link href={'/'}>
@@ -62,11 +82,11 @@ export default function Page({ params, searchParams }: { params:any, searchParam
                     </li>
                 </ul>
             </div>
-            <div className='w-full h-5/6  flex items-start justify-center flex-wrap overflow-auto'>
+            <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6'>
                 {
                     isLoading ? <Loading /> : <>
                          {
-                                thisProduct?.map((item: ProductData) => {
+                                currentItems?.map((item: ProductData) => {
                                     return <ProductCard
                                         productName = {item?.productName}
                                         productPrice = {item?.productPrice}
@@ -84,7 +104,45 @@ export default function Page({ params, searchParams }: { params:any, searchParam
                     isLoading === false && thisProduct ===  undefined || thisProduct?.length <  1 && <p className='text-2xl my-4 text-center font-semibold text-red-400'>No Product Found in this Category</p>
                 }
             </div>
-          
+           {/* Pagination */}
+      <div className="flex justify-center mt-8 space-x-4">
+        <button
+          onClick={handlePrevPage}
+          className={`px-4 py-2 rounded-md ${
+            currentPage === 1
+              ? 'bg-gray-200 dark:bg-gray-700 text-gray-600 dark:text-gray-300 cursor-not-allowed'
+              : 'bg-blue-600 text-white hover:bg-blue-700 transition-colors duration-300'
+          }`}
+          disabled={currentPage === 1}>
+          <ArrowLeft className="w-5 h-5" />
+        </button>
+        <div className="flex items-center space-x-2">
+          {Array.from({ length: totalPages }).map((_, index) => (
+            <button
+              key={index}
+              onClick={() => handlePageChange(index + 1)}
+              className={`px-4 py-2 rounded-md ${
+                currentPage === index + 1
+                  ? 'bg-blue-600 text-white hover:bg-blue-700'
+                  : 'bg-gray-200 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600'
+              } transition-colors duration-300`}
+            >
+              {index + 1}
+            </button>
+          ))}
+        </div>
+        <button
+          onClick={handleNextPage}
+          className={`px-4 py-2 rounded-md ${
+            currentPage === totalPages
+              ? 'bg-gray-200 dark:bg-gray-700 text-gray-600 dark:text-gray-300 cursor-not-allowed'
+              : 'bg-blue-600 text-white hover:bg-blue-700 transition-colors duration-300'
+          }`}
+          disabled={currentPage === totalPages}
+        >
+          <ArrowRight className="w-5 h-5" />
+        </button>
+      </div>
         </div>
     )
 }

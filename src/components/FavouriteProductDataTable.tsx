@@ -10,7 +10,6 @@ import Loading from '@/app/loading';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@/Store/store';
 import { useRouter } from 'next/navigation';
-import { delete_a_product } from '@/Services/Admin/product';
 import { delete_a_bookmark_item, get_all_bookmark_items } from '@/Services/common/bookmark';
 import { setBookmark } from '@/utils/Bookmark';
 
@@ -87,13 +86,13 @@ export default function FavouriteProductDataTable() {
             name: 'Action',
             cell: (row: BookmarkItem) => (
                 <div className='flex items-start justify-start px-2 h-20'>
-                    <button onClick={() => handleDeleteProduct(row?._id)} className=' w-20 py-2 mx-2 text-xs text-red-600 hover:text-white my-2 hover:bg-red-600 border border-red-600 rounded transition-all duration-700'>Delete</button>
+                    <button onClick={() => handleDeleteProduct(row?._id)} className='w-fit flex items-center justify-center space-x-2 px-3 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-300'>Delete</button>
                 </div>
             )
         },
 
     ];
-
+ 
     const fetchBookmarkData = async () => {
         if (!user?._id) return Router.push('/')
         const cartData = await get_all_bookmark_items(user?._id)
@@ -151,7 +150,7 @@ export default function FavouriteProductDataTable() {
                 persistTableHead
                 subHeader
                 subHeaderComponent={
-                    <input className='w-60 dark:bg-transparent py-2 px-2  outline-none  border-b-2 border-orange-600' type={"search"}
+                    <input className='w-60 dark:bg-transparent py-2 px-2  outline-none  border-b-2 border-gray-900' type={"search"}
                         value={search}
                         onChange={(e) => setSearch(e.target.value)}
                         placeholder={"Product Name"} />

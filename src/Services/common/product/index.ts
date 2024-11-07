@@ -11,7 +11,6 @@ export const get_product_details = async (id:string) => {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${Cookies.get('token')}`
           },
-          //body:formdata
       })
   
       const data = await res.json();

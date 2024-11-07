@@ -6,11 +6,11 @@ import Cookies from 'js-cookie'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import React, { Usable, use, useEffect, useState } from 'react'
-import { GrDeliver } from 'react-icons/gr'
+import React, { use, useEffect, useState } from 'react'
 import { TbListDetails } from 'react-icons/tb'
 import { useSelector } from 'react-redux'
 import { showToast } from '@/Store/toast';
+import { Package } from 'lucide-react'
 
 
 
@@ -113,7 +113,7 @@ export default function Page({ params, searchParams }: { params: any, searchPara
 
     return (
         <div className='w-full bg-gray-50 h-screen px-2 py-2'>
-            <div className="text-sm breadcrumbs  border-b-2 border-b-orange-600">
+            <div className="text-sm breadcrumbs bg-gray-900 text-white border-b-2 border-b-white">
                 <ul className='dark:text-black'>
                     <li>
                         <Link href={'/'}>
@@ -123,7 +123,7 @@ export default function Page({ params, searchParams }: { params: any, searchPara
                     </li>
                     <li >
                         <Link href={"/order/view-orders"}>
-                            <GrDeliver className="w-4 h-4 mr-2 stroke-current" />
+                        <Package className="w-4 h-4 mr-2 stroke-current" />
                             Orders
                         </Link>
                     </li>
@@ -149,7 +149,7 @@ export default function Page({ params, searchParams }: { params: any, searchPara
                                             </div>
                                             <div className='flex  px-2 py-1 flex-col items-start justify-start'>
                                                 <h1 className='my-2'>{item?.product?.productName}</h1>
-                                                <p className='text-sm my-2 font-semibold'>Rs {item?.product?.productPrice}</p>
+                                                <p className='text-sm my-2 font-semibold'>{item?.product?.productPrice} $</p>
                                                 <p className='text-sm  my-2'>Quantity :  <span className='font-semibold'>{item?.qty}</span></p>
 
                                             </div>
@@ -189,16 +189,16 @@ export default function Page({ params, searchParams }: { params: any, searchPara
                                 <h1 className='text-xl font-semibold '>Other Details</h1>
                                 <div className='flex py-2 w-full text-sm justify-between'>
                                     <p>Items Price</p>
-                                    <p className='font-semibold'>Rs {orderData?.itemsPrice}</p>
+                                    <p className='font-semibold'>{orderData?.itemsPrice} $</p>
                                 </div>
 
                                 <div className='flex py-2 w-full text-sm justify-between'>
                                     <p>Tax Price</p>
-                                    <p className='font-semibold'>Rs {orderData?.taxPrice}</p>
+                                    <p className='font-semibold'>{orderData?.taxPrice} $</p>
                                 </div>
                                 <div className='flex py-2 w-full text-sm justify-between'>
                                     <p>Total Price</p>
-                                    <p className='font-semibold'>Rs {orderData?.totalPrice}</p>
+                                    <p className='font-semibold'>{orderData?.totalPrice} $</p>
                                 </div>
                                 <div className='flex py-2 w-full text-sm justify-between'>
                                     <p>Is Paid</p>

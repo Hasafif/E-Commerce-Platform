@@ -9,9 +9,9 @@ import Cookies from 'js-cookie'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
-import { MdFavorite } from 'react-icons/md'
 import { useDispatch, useSelector } from 'react-redux'
 import { showToast } from '@/Store/toast';
+import { Bookmark } from 'lucide-react'
 
 interface userData {
     email: String,
@@ -53,7 +53,7 @@ export default function Page() {
 
     return (
         <div className='w-full bg-gray-50 h-screen px-3 py-2'>
-            <div className="text-sm breadcrumbs  border-b-2 border-b-orange-600">
+            <div className="text-sm breadcrumbs bg-gray-900 text-white border-b-2 border-b-white-900">
                 <ul className='dark:text-black'>
                     <li>
                         <Link href={"/"}>
@@ -62,7 +62,7 @@ export default function Page() {
                         </Link>
                     </li>
                     <li>
-                        <MdFavorite className="w-4 h-4 mr-2 stroke-current" />
+                        <Bookmark className="w-4 h-4 mr-2 stroke-current" />
                         Favourite Products
                     </li>
                 </ul>

@@ -1,10 +1,11 @@
 "use client"
 
 import { RootState } from '@/Store/store'
-import React from 'react'
+import React, { useRef, useState } from 'react'
 import { useSelector } from 'react-redux'
 import CategoryCard from './CategoryCard';
 import Loading from '@/app/loading';
+import { ArrowLeft, ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react';
 
 
 type CategoryData = {
@@ -18,22 +19,40 @@ type CategoryData = {
 export default function TopCategories() {
     const catData = useSelector((state: RootState) => state.Admin.category);
     const catLoading = useSelector((state: RootState) => state.Admin.catLoading);
+    //const filteredCategories = catData?.slice(0, 3)
+    const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 3;
 
+  // Calculate pagination
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = catData.slice(indexOfFirstItem, indexOfLastItem);
+  const totalPages = Math.ceil(catData.length / itemsPerPage);
+  const handlePageChange = (pageNumber: number) => {
+    setCurrentPage(pageNumber);
+  };
+  const handlePrevPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
 
-    const filteredCategories = catData?.slice(0, 3)
-
+  const handleNextPage = () => {
+    if (currentPage < totalPages) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
     return (
-        <div id='my-Categories' className='w-full bg-gray-50  flex items-center flex-col justify-start'>
-            <div className='flex items-center justify-center px-2 py-2 mb-2'>
-                <h1 className='py-2 px-4 border-x-2 border-x-orange-500 text-black font-semibold text-2xl '>Top Categories</h1>
-            </div>
-            <div className='md:w-4/5 w-full min-h-16  px-1  py-2 md:px-4 flex items-center justify-center flex-wrap'>
-                {
+        <div className="max-w-7xl mx-auto px-4 py-12">
+            <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white mb-8">
+        Top Categories
+      </h2>            
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">            {
                     catLoading ? <div className='w-full h-96'><Loading /> </div> :
                         <>
                             {
-                                filteredCategories?.length < 1 ? <h1 className='text-2xl font-semibold text-gray-500'>No Categories</h1> :
-                                filteredCategories?.map((item: CategoryData) => {
+                               currentItems?.length < 1 ? <h1 className='text-2xl font-semibold text-gray-500'>No Categories</h1> :
+                               currentItems?.map((item: CategoryData) => {
                                     return <CategoryCard 
                                         categoryName={item?.categoryName}
                                         categoryDescription={item?.categoryDescription}
@@ -47,6 +66,46 @@ export default function TopCategories() {
                 }
 
             </div>
+             {/* Pagination */}
+      <div className="flex justify-center mt-8 space-x-4">
+        <button
+          onClick={handlePrevPage}
+          className={`px-4 py-2 rounded-md ${
+            currentPage === 1
+              ? 'bg-gray-200 dark:bg-gray-700 text-gray-600 dark:text-gray-300 cursor-not-allowed'
+              : 'bg-blue-600 text-white hover:bg-blue-700 transition-colors duration-300'
+          }`}
+          disabled={currentPage === 1}
+        >
+          <ArrowLeft className="w-5 h-5" />
+        </button>
+        <div className="flex items-center space-x-2">
+          {Array.from({ length: totalPages }).map((_, index) => (
+            <button
+              key={index}
+              onClick={() => handlePageChange(index + 1)}
+              className={`px-4 py-2 rounded-md ${
+                currentPage === index + 1
+                  ? 'bg-blue-600 text-white hover:bg-blue-700'
+                  : 'bg-gray-200 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600'
+              } transition-colors duration-300`}
+            >
+              {index + 1}
+            </button>
+          ))}
+        </div>
+        <button
+          onClick={handleNextPage}
+          className={`px-4 py-2 rounded-md ${
+            currentPage === totalPages
+              ? 'bg-gray-200 dark:bg-gray-700 text-gray-600 dark:text-gray-300 cursor-not-allowed'
+              : 'bg-blue-600 text-white hover:bg-blue-700 transition-colors duration-300'
+          }`}
+          disabled={currentPage === totalPages}
+        >
+          <ArrowRight className="w-5 h-5" />
+        </button>
+      </div>
         </div>
     )
 }

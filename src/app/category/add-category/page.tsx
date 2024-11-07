@@ -9,7 +9,6 @@ import { useRouter } from 'next/navigation';
 import { add_new_category } from '@/Services/Admin/category';
 import Cookies from 'js-cookie';
 import type { PutBlobResult } from '@vercel/blob';
-import Category from '@/model/Category';
 
 
 
@@ -53,24 +52,6 @@ const uploadImages = async (file: File) => {
       const newBlob = (await response.json()) as PutBlobResult;
       console.log(newBlob);
       return newBlob.url;
-    //const storageRef = ref(storage, `ecommerce/category/${fileName}`);
-    //console.log(storageRef)
-   // const uploadTask = uploadBytesResumable(storageRef, file);
-    //console.log(uploadTask)
-    /*return new Promise((resolve, reject) => {
-        uploadTask.on('state_changed', (snapshot) => {
-        }, (error) => {
-            console.log(error)
-            reject(error);
-        }, () => {
-            getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-                resolve(downloadURL);
-            }).catch((error) => {
-                console.log(error)
-                reject(error);
-            });
-        });
-    });*/
 }
 
 
@@ -118,7 +99,6 @@ export default function AddCategory() {
         const CheckFileSize = maxSize(data.image[0]);
         if (CheckFileSize) return showToast.error({message:'Image size must be less then 1MB',duration:5000})
         const uploadImageToFirebase = await uploadImages(data.image[0]);
-        // const uploadImageToFirebase = 'https://firebasestorage.googleapis.com/v0/b/socialapp-9b83f.appspot.com/o/ecommerce%2Fcategory%2Fimages131.jpg-1683339363348-c4vcab?alt=media&token=f9303ff9-7d34-4514-a53f-832f72814337';
 
         const finalData = { categoryName: data.name, categoryDescription: data.description, categoryImage: uploadImageToFirebase, categorySlug: data.slug }
         console.log(finalData)
@@ -143,7 +123,7 @@ export default function AddCategory() {
 
     return (
         <div className='w-full  p-4 min-h-screen  bg-gray-50 flex flex-col '>
-            <div className="text-sm breadcrumbs  border-b-2 border-b-orange-600">
+            <div className="text-sm breadcrumbs bg-gray-900 text-white border-b-2">
                 <ul className='dark:text-black'>
                     <li>
                         <Link href={'/Dashboard'}>
@@ -166,14 +146,14 @@ export default function AddCategory() {
                         <TailSpin
                             height="50"
                             width="50"
-                            color="orange"
+                            color="gray"
                             ariaLabel="tail-spin-loading"
                             radius="1"
                             wrapperStyle={{}}
                             wrapperClass=""
                             visible={true}
                         />
-                        <p className='text-sm mt-2 font-semibold text-orange-500'>Adding Category Hold Tight ....</p>
+                        <p className='text-sm mt-2 font-semibold text-gray-900'>Adding Category Hold Tight ....</p>
                     </div>
                 ) : (
 
@@ -211,7 +191,7 @@ export default function AddCategory() {
 
                             </div>
 
-                            <button className='btn btn-block mt-3'>Done !</button>
+                            <button className='btn btn-block mt-3 bg-gray-900'>Add</button>
 
                         </form >
                     </div >

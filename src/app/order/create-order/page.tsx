@@ -146,9 +146,7 @@ export default function Page() {
     
             const res =  await create_a_new_stripe_session(finalData);
             if (res.sessionId){
-               // showToast.success({message:res?.message,duration:5000})
                const stripe =  await stripePromise;
-               //console.log('stripe', stripe)
        
                const response = await stripe?.redirectToCheckout({
                  sessionId: res.sessionId,
@@ -156,7 +154,6 @@ export default function Page() {
        
               console.log('response', response)
                setLoader(false)
-               //showToast.success({message:res?.message,duration:5000})
                return response
             }else{
     
@@ -188,7 +185,7 @@ export default function Page() {
 
     return (
         <div className='w-full h-full bg-gray-50 px-2'>
-            <div className="text-sm breadcrumbs  border-b-2 border-b-orange-600">
+            <div className="text-sm breadcrumbs bg-gray-900 text-white border-b-2 border-b-white">
                 <ul className='dark:text-black'>
                     <li>
                         <Link href={"/"}>
@@ -213,14 +210,14 @@ export default function Page() {
                         <TailSpin
                             height="50"
                             width="50"
-                            color="orange"
+                            color="gray"
                             ariaLabel="tail-spin-loading"
                             radius="1"
                             wrapperStyle={{}}
                             wrapperClass=""
                             visible={true}
                         />
-                        <p className='text-sm mt-2 font-semibold text-orange-500'>Loading Hold Tight ....</p>
+                        <p className='text-sm mt-2 font-semibold text-gray-900'>Loading Hold Tight ....</p>
                     </div>
                 ) : (
 
@@ -232,7 +229,7 @@ export default function Page() {
                                     cartData?.length === 0 ?
                                         <div className='w-full h-full flex items-center justify-center flex-col'>
                                             <p className='my-4 mx-2 text-lg font-semibold '>No Item Available in Cart</p>
-                                            <Link href={"/"} className='btn text-white'>Shop Now</Link>
+                                            <Link href={"/"} className='btn bg-gray-900 text-white'>Shop Now</Link>
                                         </div>
                                         :
                                         cartData?.map((item: Data) => {
@@ -246,12 +243,12 @@ export default function Page() {
                                 }
                             </div>
                             <div className='w-full  py-2 my-2 flex justify-end '>
-                                <h1 className='py-2 tracking-widest mb-2  border-b px-6 border-orange-600 text-sm  flex flex-col '>  Original Price  <span className='text-xl font-extrabold'>Rs {totalPrice || 0}</span> </h1>
-                                <h1 className='py-2 tracking-widest mb-2  border-b px-6 border-orange-600 text-sm  flex flex-col '>  Shipping Price  <span className='text-xl font-extrabold'>Rs {500}</span> </h1>
-                                <h1 className='py-2 tracking-widest mb-2  border-b px-6 border-orange-600 text-sm  flex flex-col '>  tax Price  <span className='text-xl font-extrabold'>Rs {100}</span> </h1>
+                                <h1 className='py-2 tracking-widest mb-2  border-b px-6 border-gray-900 text-sm  flex flex-col '>  Original Price  <span className='text-xl font-extrabold'>{totalPrice || 0} $</span> </h1>
+                                <h1 className='py-2 tracking-widest mb-2  border-b px-6 border-gray-900 text-sm  flex flex-col '>  Shipping Price  <span className='text-xl font-extrabold'>{500} $</span> </h1>
+                                <h1 className='py-2 tracking-widest mb-2  border-b px-6 border-gray-900 text-sm  flex flex-col '>  tax Price  <span className='text-xl font-extrabold'>{100} $</span> </h1>
                             </div>
                             <div className='w-full  py-2 my-2 flex justify-end '>
-                                <h1 className='py-2 tracking-widest mb-2  border-b px-6 border-orange-600 text-sm  flex flex-col '>  Total Order Price  <span className='text-xl font-extrabold'>Rs {totalPrice + 600}</span> </h1>
+                                <h1 className='py-2 tracking-widest mb-2  border-b px-6 border-gray-900 text-sm  flex flex-col '>  Total Order Price  <span className='text-xl font-extrabold'>{totalPrice + 600} $</span> </h1>
                             </div>
                         </div>
 
@@ -296,7 +293,7 @@ export default function Page() {
 
                             </div>
 
-                            <button className='btn btn-block mt-3'>Order !</button>
+                            <button className='btn btn-block mt-3 bg-gray-900'>Order !</button>
 
                         </form >
 

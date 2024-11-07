@@ -24,16 +24,7 @@ export default function Home() {
   const [ratio, setRatio] = useState(16/9) 
   
   
-  /*useEffect(() => {
-    //toast.warning("Application is under development , some features may not work properly")
-    //toast.warning('This is a demo website, you can not buy anything from here')
-    showToast.custom({
-
-
-      message: 'This is a demo website, you can not buy anything from here!',
-    });
-  }, [])*/
-
+  
   useEffect(() => {
     const userData = localStorage.getItem('user');
     if (!userData) return;
@@ -78,9 +69,9 @@ export default function Home() {
 
   return (
     <>
-    {/*<ToastContainer />*/}
-      {<Navbar />}
-      {<Hero setRatio={setRatio} />}
+    
+      <Navbar />
+      <Hero setRatio={setRatio} />
       {
         loading ? <Loading /> :
           <>
@@ -91,7 +82,7 @@ export default function Home() {
 
           </>
       }
-      {/*<ToastContainer />*/}
+
     </>
   )
 }

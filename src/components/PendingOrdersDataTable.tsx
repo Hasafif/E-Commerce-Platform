@@ -127,7 +127,7 @@ export default function PendingOrdersDataTable() {
       name: 'Action',
       cell: (row: Order) => (
 
-        <button onClick={() => updateOrderStatus(row?._id)} className=' w-20 py-2 mx-2 text-xs text-green-600 hover:text-white my-2 hover:bg-green-600 border border-green-600 rounded transition-all duration-700'>Delivered</button>
+        <button onClick={() => updateOrderStatus(row?._id)} className=' w-20 py-2 mx-2 text-xs text-white bg-blue-600 hover:bg-blue-700 border border-blue-600 rounded transition-all duration-700'>Deliver</button>
 
       )
     },
@@ -169,7 +169,7 @@ export default function PendingOrdersDataTable() {
         persistTableHead
         subHeader
         subHeaderComponent={
-          <input className='w-60 dark:bg-transparent py-2 px-2  outline-none  border-b-2 border-orange-600' type={"search"}
+          <input className='w-60 dark:bg-transparent py-2 px-2  outline-none  border-b-2 border-gray-900' type={"search"}
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder={"Orders ID"} />

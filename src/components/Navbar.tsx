@@ -1,71 +1,75 @@
-"use client"
-
-import React, { useEffect, useState } from 'react'
-import Link from 'next/link'
+'use client'
+import React, { useState } from 'react';
+import { 
+  ShoppingCart,
+  User,
+  LogOut,
+  Bookmark,
+  List,
+  Package,
+  LogInIcon,
+  LogOutIcon,
+} from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import Cookies from 'js-cookie';
 import { RootState } from '@/Store/store';
 import { useSelector } from 'react-redux';
-import { FaCartArrowDown } from 'react-icons/fa';
-import {CiDeliveryTruck} from 'react-icons/ci'
-import { MdFavorite } from 'react-icons/md';
+import Link from 'next/link';
 
-
-export default function Navbar() {
-    const router = useRouter()
-    const [Scrolled, setScrolled] = useState(false);
+const Navbar = () => {
+ const router = useRouter();
     const user =  useSelector((state : RootState) => state.User.userData)
-
-    useEffect(() => {
-        window.onscroll = () => {
-           // setScrolled(window.p < 30 ? false : true)
-            setScrolled(false)
-            return () => window.onscroll = null
-        }
-    }, [Scrolled])
-
-
-
     const handleLogout = () => {
         Cookies.remove('token');
         localStorage.clear();
         location.reload();
     }
+  return (
+    <nav className="bg-gray-900 text-white shadow">
+      <div className="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+        <a href="/" className="text-xl font-bold">
+          Havebreak E-commerce
+        </a>
 
-    return (
-        <div className={`navbar ${Scrolled ? "bg-white/95  " : "bg-transparent"}  fixed text-white top-0 left-0 z-50`}>
-            <div className="navbar-start">
-                <div className="dropdown">
-                    <label tabIndex={0} className="btn btn-active text-white btn-circle">
-                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h7" /></svg>
-                    </label>
-                    <ul tabIndex={0} className="menu menu-compact dropdown-content mt-3 p-2 shadow text-black bg-gray-50 rounded-box w-52">
-                        <li><Link href={'/'}>Homepage</Link></li>
-                        <li><Link href={'/'}>Shop</Link></li>
-                        <li><Link href={"/order/view-orders"}>My Orders</Link></li>
-                        <li><Link href={"/Dashboard"}>Dashboard</Link></li>
-                    </ul>
-                </div>
-            </div>
-            <div className='navbar-end'>
-                <div className="flex-none">
-
-                    {
-                        user ?
-                        <div className='flex items-center justify-center  min-h-full'>
-                         <button onClick={handleLogout} className='btn text-white mx-2'>logout</button>
-                         <button onClick={() => router.push("/order/create-order")} className='btn btn-circle  mx-2'><FaCartArrowDown className='text-white text-xl' /></button>
-                         <button onClick={() => router.push("/bookmark")} className='btn btn-circle  mx-2'><MdFavorite className='text-white text-xl' /></button>
-                         <button onClick={() => router.push("/order/view-orders")} className='btn btn-circle  mx-2'><CiDeliveryTruck className='text-white text-xl' /></button>
-                         
-                        </div>
-                            :
-                            <button onClick={() => router.push('/auth/login')} className='btn text-white mx-2'>Login</button>
-                    }
-
-
-                </div>
-            </div>
+        {/* Navigation Links */}
+        <div className="flex items-center space-x-6">
+          <button onClick={() => router.push("/order/create-order")} className="flex items-center space-x-2 hover:text-gray-400 transition-colors">
+            <ShoppingCart className="w-5 h-5" />
+            <span>Cart</span>
+          </button>
+          <button onClick={() => router.push("/order/view-orders")} className="flex items-center space-x-2 hover:text-gray-400 transition-colors">
+            <Package className="w-5 h-5" />
+            <span>Orders</span>
+          </button>
+          <button onClick={() => router.push("/bookmark")} className="flex items-center space-x-2 hover:text-gray-400 transition-colors">
+            <Bookmark className="w-5 h-5" />
+            <span>Bookmarks</span>
+          </button>
         </div>
-    )
-}
+        {!user && <div>
+       <button title='Log In' onClick={() => router.push('/auth/login')}>
+      <LogInIcon className="w-5 h-5" />
+        </button>
+
+        </div>}
+          { user &&<div className="dropdown dropdown-end">
+                    <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
+                        <div className="w-10 relative">
+                        <User className="w-5 h-5" />
+                        </div>
+                    </label>
+                    <ul tabIndex={0} className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-gray-900 text-white rounded-box w-52">
+                        <li>
+                            <Link href={"/"} className="justify-between">
+                                Support
+                            </Link>
+                        </li>
+                        <li onClick={handleLogout}><button> Logout <LogOutIcon className="w-5 h-5" /></button></li>
+                    </ul>
+                </div>}
+      </div>
+    </nav>
+  );
+};
+
+export default Navbar;

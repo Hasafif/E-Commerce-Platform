@@ -78,21 +78,21 @@ export default function  Register (){
             <form onSubmit={handleSubmit} className="space-y-4 md:space-y-6" action="#">
               <div className='text-left'>
                 <label htmlFor="name" className="block mb-2 text-sm font-medium text-gray-900 ">Your Name</label>
-                <input onChange={(e) => setFormData({ ...formData, name: e.target.value })} type="text" name="name" id="namw" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-orange-600 focus:border-orange-600 block w-full p-2.5" placeholder="Name"  />
+                <input onChange={(e) => setFormData({ ...formData, name: e.target.value })} type="text" name="name" id="namw" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5" placeholder="Name"  />
                 {
                   error.name && <p className="text-sm text-red-500">{error.name}</p>
                 }
               </div>
               <div className='text-left'>
                 <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900 ">Your email</label>
-                <input onChange={(e) => setFormData({ ...formData, email: e.target.value })} type="email" name="email" id="email" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-orange-600 focus:border-orange-600 block w-full p-2.5" placeholder="name@company.com"  />
+                <input onChange={(e) => setFormData({ ...formData, email: e.target.value })} type="email" name="email" id="email" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5" placeholder="name@company.com"  />
                 {
                   error.email && <p className="text-sm text-red-500">{error.email}</p>
                 }
               </div>
               <div className='text-left'>
                 <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900 ">Password</label>
-                <input onChange={(e) => setFormData({ ...formData, password: e.target.value })} type="password" name="password" id="password" placeholder="••••••••" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-orange-600 focus:border-orange-600 block w-full p-2.5"  />
+                <input onChange={(e) => setFormData({ ...formData, password: e.target.value })} type="password" name="password" id="password" placeholder="••••••••" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5"  />
                 {
                   error.password && <p className="text-sm text-red-500">{error.password}</p>
                 }
@@ -103,19 +103,19 @@ export default function  Register (){
                                         <TailSpin
                                             height="20"
                                             width="20"
-                                            color="white"
+                                            color="gray"
                                             ariaLabel="tail-spin-loading"
                                             radius="1"
                                             wrapperStyle={{}}
                                             wrapperClass=""
                                             visible={true}
                                         />
-                                        </button> : <button type="submit" className="w-full text-white bg-orange-600 hover:bg-orange-700 focus:ring-4 focus:outline-none focus:ring-orange-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Sign up</button>
+                                        </button> : <button type="submit" className="w-full text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Sign up</button>
                                 }
 
               
               <p className="text-sm  text-gray-500 ">
-                Already have an account  <Link href="/auth/login" className="font-medium text-orange-600 hover:underline ">Sign In</Link>
+                Already have an account  <Link href="/auth/login" className="font-medium text-blue-600 hover:underline ">Sign In</Link>
               </p>
             </form>
           </div>

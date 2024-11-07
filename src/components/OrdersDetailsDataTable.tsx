@@ -125,7 +125,7 @@ export default function OrdersDetailsDataTable() {
       name: 'Action',
       cell: (row: Order) => (
 
-        <button onClick={() => router.push(`/order/view-orders-details/${row?._id}`)} className=' w-20 py-2 mx-2 text-xs text-green-600 hover:text-white my-2 hover:bg-green-600 border border-green-600 rounded transition-all duration-700'>Details</button>
+        <button onClick={() => router.push(`/order/view-orders-details/${row?._id}`)} className='w-fit flex items-center justify-center space-x-2 px-3 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-300'>Details</button>
 
       )
     },
@@ -167,7 +167,7 @@ export default function OrdersDetailsDataTable() {
         persistTableHead
         subHeader
         subHeaderComponent={
-          <input className='w-60 dark:bg-transparent py-2 px-2  outline-none  border-b-2 border-orange-600' type={"search"}
+          <input className='w-60 dark:bg-transparent py-2 px-2  outline-none  border-b-2 border-gray-900' type={"search"}
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder={"Orders ID"} />
