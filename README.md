@@ -11,7 +11,7 @@ To run this project locally follow the instructions below:
    
    <code>git clone https://github.com/Hasafif/E-Commerce-Platform/main</code>
    
-2. Install dependeniceies:
+2. Install dependencies:
    
    <code>npm install</code>
 
@@ -24,7 +24,7 @@ To run this project locally follow the instructions below:
 
 To get a complete user experience visit: https://e-commerce-platform-6x26.vercel.app
 
-and use the following Admin Account
+and use the following Admin Account:
 
 UserName: Adminstrator@gmail.com
 
