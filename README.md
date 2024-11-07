@@ -9,7 +9,7 @@ This Repository is the offical sourece code for an E-Commerce Platform specializ
 To run this project locally follow the instructions below:
 1. Clone project:
    
-   <code>git clone https://github.com/Hasafif/E-Commerce-Platform/main</code>
+   <code>git clone git@github.com:Hasafif/E-Commerce-Platform.git</code>
    
 2. Install dependencies:
    
