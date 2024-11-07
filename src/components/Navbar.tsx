@@ -28,7 +28,7 @@ const Navbar = () => {
     <nav className="bg-gray-900 text-white shadow">
       <div className="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
         <a href="/" className="text-xl font-bold">
-          Havebreak E-commerce
+          E-Store
         </a>
 
         {/* Navigation Links */}

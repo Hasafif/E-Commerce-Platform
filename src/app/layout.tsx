@@ -13,8 +13,8 @@ const poppin = Poppins({
 
 export const metadata = {
   title: 'Ecommerce Next App',
-  description: 'Developed by Abdullah Moiz',
-  authors: [{ name: "Abdullah Moiz", url: 'https://abdullahmoiz.vercel.app/' }],
+  description: 'Developed by Hasan Afif for Havebreak Company',
+  authors: [{ name: "Hasan Afif", url: 'https://e-commerce-platform-6x26.vercel.app/' }],
 }
 
 export default function RootLayout({

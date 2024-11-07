@@ -68,7 +68,7 @@ const FeaturedProduct  = () => {
     return (
         <div className='max-w-7xl mx-auto px-4 py-12'>
               <div><h2 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white mb-8">
-        Top Categories
+        Top Products
       </h2>
       <p className='text-xl sm:text-2xl font-bold text-gray-900 dark:text-white mb-4'>Explore Our Wide Range of Products</p>
       </div>
