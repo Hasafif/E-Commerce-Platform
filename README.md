@@ -8,12 +8,24 @@ This Repository is the offical sourece code for an E-Commerce Platform specializ
 
 To run this project locally follow the instructions below:
 1. Clone project:
+   
    <code>git clone https://github.com/Hasafif/E-Commerce-Platform/main</code>
+   
 2. Install dependeniceies:
+   
    <code>npm install</code>
-3. copy contents of .env.example file and give each variable an appropriate value
+
+3. run:
+
+   <code>npm run dev</code>
+   
+4. copy contents of .env.example file and give each variable an appropriate value
+
+
 To get a complete user experience visit: https://e-commerce-platform-6x26.vercel.app
-and use the following Admin Account:
+
+and use the following Admin Account
+
 UserName: Adminstrator@gmail.com
 
 Password: 12345678
